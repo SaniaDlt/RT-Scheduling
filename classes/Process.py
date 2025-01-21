@@ -1,20 +1,48 @@
 import numpy as np
+from enum import Enum
 
 class Process:
     def __init__(self,name:str,burst:int,resources:np.array,arrive:int,processor=1):
         self.name = name
         self.burst = burst
-        self.allocation = (0,0)
+        self.isAllocated =False
         self.need = resources
         self.arrive = arrive
         self.processor_num = processor
+        self.done_bursts=0
+        self.state = None
 
-    def allocate(self,resource:tuple):
-        if self.need < resource : raise Exception("A proccess cannot get more that it wanted")
-        self.need = self.need - resource
-        self.allocation = self.allocate + resource
-        #TODO create banker algorithm for each core
-        return
+    def allocate(self):
+        self.isAllocated = True
+        
+    def deallocate(self):
+        self.isAllocated = False
+        self.done_bursts = 0
+
+    def running(self):
+        self.state = State.RUNNING
+
+    def waiting(self):
+        self.state = State.WAIT
+    
+    def ready(self):
+        self.state = State.READY
+
+    def do_burst(self):
+        if self.isAllocated  and self.state== State.RUNNING:
+            self.done_bursts+=1
+            if self.done_bursts == self.burst:
+                return True
+            else: return False
+        else:
+            raise Exception("A process should  be allocated and be in running state")
+
+class State(Enum):
+    RUNNING=0
+    WAIT=2
+    READY=1
+
+
 #Periodic process
 class PeriodicProcess(Process):
     def __init__(self, name:str, burst:int, resources, arrive:int,

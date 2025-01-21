@@ -66,3 +66,5 @@ class Banker:
         else:
             return True,safe
 
+class DeadLockDetection:
+    pass
