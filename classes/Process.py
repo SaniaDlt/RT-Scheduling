@@ -17,7 +17,6 @@ class Process:
         
     def deallocate(self):
         self.isAllocated = False
-        self.done_bursts = 0
 
     def running(self):
         self.state = State.RUNNING
