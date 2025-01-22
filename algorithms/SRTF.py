@@ -1,16 +1,20 @@
 from SchedulingAlgorithm import SchedulingAlgorithm as interface
 from classes.ReadyQueue import ReadyQueue
-from queue import PriorityQueue
+import heapq
 from classes.Process import Process
 class SRTF(interface):
     def __init__(self,rqueue:ReadyQueue):
-        self.queue = PriorityQueue()
+        self.queue = []
         rqueue.queue = self.queue
         
     def choose(self):
-        _,process = self.queue.get()
-        return process
+        _,process = heapq.heappop(self.queue)
+        return _,process
 
     def schedule(self,p : Process):
         priority = p.burst - p.done_bursts
-        self.queue.put((priority,p))
+        heapq.heappush(self.queue, (priority, p))
+    
+    def schedule_deadlock_case(self,priority,p:Process):
+        priority = priority
+        heapq.heappush(self.queue,(priority,p))

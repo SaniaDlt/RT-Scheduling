@@ -3,9 +3,10 @@ from algorithms.SRTF import SRTF
 from Core import Core
 from threading import Semaphore,Thread
 from inputs import intrupt_handler
+from classes.ResourceManager import ResourceManager
 
 class SubSystem2:
-    def __init__(self,timestamp,resources,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+    def __init__(self,timestamp,resources:ResourceManager,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
         self.timestamp = timestamp
         self.ready_queue = ReadyQueue(SRTF)
         self.system_sem = Semaphore(0)

@@ -26,7 +26,10 @@ class Process:
     
     def ready(self):
         self.state = State.READY
-
+    
+    def get_resources(self):
+        return self.need
+    
     def do_burst(self):
         if self.isAllocated  and self.state== State.RUNNING:
             self.done_bursts+=1
