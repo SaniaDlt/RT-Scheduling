@@ -23,13 +23,9 @@ class SubSystem2:
         event = intrupt_handler(self.timestamp,self.time)
         if event != None:
             for p in event:
-                priority = p.burst - p.done_bursts
-                # TODO handle deadlock
-                if self.resources >= p.resources:
-                    self.resources -=p.resources
-                    p.allocate()
-                    p.ready()
-                    self.ready_queue.put((priority,p))
+                priority = p.burst
+                p.ready()
+                self.ready_queue.put((priority,p))
         self.time+=1
     
     def running(self):

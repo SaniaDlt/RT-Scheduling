@@ -12,9 +12,10 @@ class Core:
     def do_cycle(self):
         if self.process == None:
             self.process=self.ready_queue.get_process()
-        self.process.running()
         if self.process != None:
-            #Not idle
+            #TODO check for resources
+            
+            self.process.running()
             end=self.process.do_burst()
             temp = self.process.name
             if end:

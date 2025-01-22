@@ -12,5 +12,5 @@ class SRTF(interface):
         return process
 
     def schedule(self,p : Process):
-        priority = p.burst - p.do_burst
+        priority = p.burst - p.done_bursts
         self.queue.put((priority,p))

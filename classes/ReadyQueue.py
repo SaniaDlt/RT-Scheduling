@@ -8,7 +8,8 @@ class ReadyQueue:
     def get_process(self):
         if not self.queue.empty():
             process = self.algorithm.choose()
-            process.running()
+            return process
+        return None
     
     def schedule_process(self,p):
         p.ready()
