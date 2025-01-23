@@ -14,3 +14,6 @@ class ReadyQueue:
     def schedule_process(self,p):
         p.ready()
         self.algorithm.schedule(p)
+    
+    def __str__(self):
+        return f"Ready Queue: {self.queue}"

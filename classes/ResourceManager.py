@@ -18,4 +18,8 @@ class ResourceManager:
         with self.lock:
             self.r1+=r1
             self.r2+=r2
+    
+    def __str__(self):
+        with self.lock:
+            return f"Resources R1:{self.r1} R2:{self.r2}"
         

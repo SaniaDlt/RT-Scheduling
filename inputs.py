@@ -1,4 +1,5 @@
 from classes.Process import Process,PeriodicProcess,DependentProcess
+from classes.ResourceManager import ResourceManager
 
 def read_file(path):
     resources = [0 for i in range(4)]
@@ -11,7 +12,7 @@ def read_file(path):
             # Getting resources from file
             if i<=3:
                 res = line.strip().split(" ")
-                resources[i] = (int(res[0]),int(res[1]))
+                resources[i] = ResourceManager(int(res[0]),int(res[1]))
                 i+=1
             elif "$" in line:
                 #Changing input of the subsystem

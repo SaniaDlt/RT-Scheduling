@@ -31,8 +31,8 @@ class SubSystem2:
     
     def running(self):
         # TODO log to upper system
-        core1 = Thread(self.core1.running)
-        core2 = Thread(self.core2.running)
+        core1 = Thread(target=self.core1.running)
+        core2 = Thread(target=self.core2.running)
         core1.start()
         core2.start()
         while True:
@@ -44,7 +44,18 @@ class SubSystem2:
 
             self.system_sem.acquire()
             self.system_sem.acquire()
+            #After cores
+            self.concat_message()
             self.main_system_sem.release()
+
+    def concat_message(self):
+        result = f"Sub2\n {self.resources}\n{self.ready_queue}\n"
+        i=1
+        for m in self.log_up:
+            result+=f"Core {i}:\n"
+            result+=m+"\n"
+            i+=1
+        self.log_low[1]= result
 
 
 
