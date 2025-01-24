@@ -1,15 +1,16 @@
-from SchedulingAlgorithm import SchedulingAlgorithm
+from .SchedulingAlgorithm import SchedulingAlgorithm
 from classes.ReadyQueue import ReadyQueue
-from queue import PriorityQueue
+from queue import Queue
 from classes.Process import Process
 
 class FCFS(SchedulingAlgorithm):
     def __init__(self, ready_queue: ReadyQueue):
-        self.queue = PriorityQueue()
+        self.queue = Queue()
         ready_queue.queue = self.queue
         
     def choose(self):
-        return self.queue.get()
+        process = self.queue.get()
+        return process
     
-    def schedule(self, process: Process):
-        self.queue.put(process)
+    def schedule(self, p: Process):
+        self.queue.put(p)
