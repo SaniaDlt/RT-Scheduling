@@ -11,7 +11,8 @@ class Process:
         self.processor_num = processor
         self.done_bursts=0
         self.state = None
-        self.first_priority = 0;
+        self.count = 0
+
 
     def allocate(self):
         self.isAllocated = True
@@ -39,6 +40,13 @@ class Process:
             else: return False
         else:
             raise Exception("A process should  be allocated and be in running state")
+    
+    def __str__(self):
+        #TODO print the process!
+        #Contains ending time
+        #Cointains waiting time
+        # Contain the core number
+        pass
 
 class State(Enum):
     RUNNING=0

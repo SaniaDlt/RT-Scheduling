@@ -1,18 +1,18 @@
 from .SchedulingAlgorithm import SchedulingAlgorithm
 from classes.ReadyQueue import ReadyQueue
-from queue import PriorityQueue
+import heapq
 from classes.Process import Process
 
-class WRR(SchedulingAlgorithm):
+class WRR:
     def __init__(self, ready_queue: ReadyQueue):
-        self.queue = PriorityQueue()
+        self.queue = []
         ready_queue.queue = self.queue
            
     def choose(self):
-        if not self.queue.empty():
-            _,_, process = self.queue.get()
-            return process
+        if 0<len(self.queue):
+            p1,_, process = heapq.heappop(self.queue)
+            return p1,process
         return None
     
-    def schedule(self, p: Process):
-        self.queue.put((p.first_priority, p.burst, p))
+    def schedule(self,first_priority ,p: Process):
+        heapq.heappush(self.queue,(first_priority, p.burst, p))

@@ -1,6 +1,6 @@
 from classes.ReadyQueue import ReadyQueue
 from algorithms.SRTF import SRTF
-from Core import Core
+from .Core2 import Core2
 from threading import Semaphore,Thread
 from inputs import intrupt_handler
 from classes.ResourceManager import ResourceManager
@@ -16,21 +16,19 @@ class SubSystem2:
         self.main_system_sem = mainsystem_sem
         self.my_sem = system_sem
         self.log_up = [0 for i in range(2)]
-        self.core1 = Core(self.ready_queue,self.log_up,1,self.core_sem,self.system_sem)
-        self.core2 = Core(self.ready_queue,self.log_up,2,self.core_sem,self.system_sem)
+        self.core1 = Core2(self.ready_queue,self.log_up,1,self.core_sem,self.system_sem)
+        self.core2 = Core2(self.ready_queue,self.log_up,2,self.core_sem,self.system_sem)
         self.time = 0
     
     def intrupt_hander(self):
         event = intrupt_handler(self.timestamp,self.time)
         if event != None:
-            for p in event:
-                priority = p.burst
+            for p in event:   
                 p.ready()
-                self.ready_queue.put((priority,p))
+                self.ready_queue.schedule_process(p)
         self.time+=1
     
     def running(self):
-        # TODO log to upper system
         core1 = Thread(target=self.core1.running)
         core2 = Thread(target=self.core2.running)
         core1.start()

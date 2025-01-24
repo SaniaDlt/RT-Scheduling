@@ -9,8 +9,10 @@ class SRTF(interface):
         rqueue.queue = self.queue
         
     def choose(self):
-        _,process = heapq.heappop(self.queue)
-        return _,process
+        if 0<len(self.queue):
+            _,process = heapq.heappop(self.queue)
+            return _,process
+        return None,None
 
     def schedule(self,p : Process):
         priority = p.burst - p.done_bursts

@@ -1,6 +1,6 @@
 from threading import Semaphore
 from classes.ResourceManager import ResourceManager
-class Core:
+class Core2:
     def __init__(self,ready_queue,log,core_num,core_semaphore:Semaphore,system_semaphore:Semaphore,resource_manager:ResourceManager):
         self.ready_queue = ready_queue
         self.process =None
@@ -36,7 +36,7 @@ class Core:
             self.process =None
             self.priority =None
             #----
-            self.log[self.core_num-1] = f"Running task: DeadLock! No resource for the process!"
+            self.log[self.core_num-1] = f"Running task:Idle DeadLock! No resource for the process!"
             return
         temp = self.process.name
         if end:
@@ -50,7 +50,7 @@ class Core:
         
     def check_preempt(self):
         p = self.process.burst - self.process.done_bursts 
-        if p > self.ready_queue.queue[0][0]:
+        if 0 < len(self.ready_queue.queue) and p > self.ready_queue.queue[0][0]:
             #switch out:
             need=self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1]) 
