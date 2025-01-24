@@ -11,6 +11,7 @@ class Process:
         self.processor_num = processor
         self.done_bursts=0
         self.state = None
+        self.first_priority = 0;
 
     def allocate(self):
         self.isAllocated = True

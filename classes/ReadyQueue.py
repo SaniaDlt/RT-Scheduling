@@ -1,9 +1,9 @@
-from algorithms.SchedulingAlgorithm import SchedulingAlgorithm
+# from algorithms.SchedulingAlgorithm import SchedulingAlgorithm
 
 class ReadyQueue:
-    def __init__(self,algorithm:SchedulingAlgorithm):
+    def __init__(self,algorithm_class):
         self.queue=None
-        self.algorithm = algorithm(self)
+        self.algorithm = algorithm_class(self)
     
     def get_process(self):
         if not self.queue.empty():

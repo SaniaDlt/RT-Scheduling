@@ -1,4 +1,5 @@
 from threading import Lock
+
 class ResourceManager:
     def __init__(self,r1,r2):
         self.r1=r1

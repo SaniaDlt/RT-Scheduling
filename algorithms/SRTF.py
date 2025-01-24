@@ -1,7 +1,8 @@
-from SchedulingAlgorithm import SchedulingAlgorithm as interface
+from .SchedulingAlgorithm import SchedulingAlgorithm as interface
 from classes.ReadyQueue import ReadyQueue
 import heapq
 from classes.Process import Process
+
 class SRTF(interface):
     def __init__(self,rqueue:ReadyQueue):
         self.queue = []
