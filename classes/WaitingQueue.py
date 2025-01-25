@@ -19,7 +19,6 @@ class WaitingQueue:
     def put_process(self, process: Process):
         with self.lock:
             resource_available = self.resource.request(process.need[0], process.need[1])
-            print(self.resource)
             if not resource_available:
                 process.waiting()
                 self.queue.put(process)

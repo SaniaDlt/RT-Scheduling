@@ -14,6 +14,7 @@ class Core2:
         self.priority =None
         self.in_core =intermediate_core_sem
         self.in_sys = intermediate_sys_sem
+        self.t=1
     
     def do_cycle(self):
         self.check_preempt()
@@ -32,7 +33,7 @@ class Core2:
         
         self.process.running()
         try:
-            end=self.process.do_burst()
+            end=self.process.do_burst(self.t)
         except Exception as e:
             # Case that we dont not allocate resource to the process
             #Using invert againg!
@@ -77,6 +78,7 @@ class Core2:
         while True:
             self.core_sem.acquire()
             self.do_cycle()
+            self.t+=1
             self.system_sem.release()
 
     def pulse_sync(self):

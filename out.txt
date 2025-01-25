@@ -1,0 +1,812 @@
+[(0, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:0 runtime 0), (0, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:0 runtime 0)]
+Time : 1
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:0 runtime 0]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle Not enought resource
+Core 3:
+Ready Queue: [(0, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:0 runtime 0), (1, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:0 runtime 1)]
+Running task: T13
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:2 R2:7 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Time : 2
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:0 runtime 0]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(1, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:0 runtime 1), (1, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:1 runtime 1)]
+Running task: T12
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31 Finished
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Time : 3
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(1, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:1 runtime 1), (1, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:0 runtime 0), (2, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:1 runtime 2)]
+Running task: T13
+
+Sub2
+ Resources R1:2 R2:1
+Ready Queue: [(11, Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:0 runtime 0)]
+Core 1:
+Running task: T22
+Core 2:
+Running task:Idle DeadLock! No resource for the process!
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+[(1, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:0 runtime 0), (1, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:1 runtime 1)]
+Time : 4
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:1 runtime 2]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle Not enought resource
+Core 3:
+Ready Queue: [(1, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:1 runtime 1), (2, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:3 runtime 1)]
+Running task: T11
+
+Sub2
+ Resources R1:0 R2:0
+Ready Queue: [(11, Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:0 runtime 0)]
+Core 1:
+Running task: T22
+Core 2:
+Running task: T23
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Time : 5
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:1 runtime 2]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(2, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:3 runtime 1), (2, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:3 runtime 2)]
+Running task: T12
+
+Sub2
+ Resources R1:0 R2:0
+Ready Queue: [(11, Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:0 runtime 0)]
+Core 1:
+Running task: T22
+Core 2:
+Running task: T23
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Time : 6
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(2, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:3 runtime 2), (2, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:1 runtime 2), (3, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:4 runtime 2)]
+Running task: T11
+
+Sub2
+ Resources R1:0 R2:4
+Ready Queue: [(11, Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:0 runtime 0)]
+Core 1:
+Running task: T22 Finished!
+Core 2:
+Running task: T23
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle Depends on something!
+Core 2:
+Running task: idle
+
+[(2, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:1 runtime 2), (2, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:3 runtime 2)]
+Time : 7
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:4 runtime 2]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle Not enought resource
+Core 3:
+Ready Queue: [(2, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:3 runtime 2), (3, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:4 runtime 3)]
+Running task: T13
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: [(12, Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:0 runtime 0)]
+Core 1:
+Running task:Idle DeadLock! No resource for the process!
+Core 2:
+Running task: T23 Finished!
+
+Sub3
+ Resources R1:2 R2:7 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Time : 8
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue [Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:4 runtime 2]
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(3, 4, Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:4 runtime 3), (3, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:5 runtime 3)]
+Running task: T12
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31 Finished
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 9
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(3, 4, Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:5 runtime 3), (3, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:4 runtime 2)]
+Running task: T13 Finished!
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 10
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(3, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:4 runtime 2)]
+Running task: T12 Finished!
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 11
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(4, 4, Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:8 runtime 3)]
+Running task: T11
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42 Task Broken! Should run again
+
+Time : 12
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: T11 Finished!
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 13
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:2 R2:7 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 14
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31 Finished
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Time : 15
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: [Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:0 runtime 0]
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42 Finished!
+
+Time : 16
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41
+
+Time : 17
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: T21 Finished!
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41 Task Broken! Should run again
+
+Time : 18
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41
+
+Time : 19
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41 Finished!
+
+Time : 20
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Summery:
+Name T11 needed resource (1, 3)
+          arrive at 0 waiting time:8 runtime 4
+Name T12 needed resource (3, 3)
+          arrive at 0 waiting time:6 runtime 4
+Name T13 needed resource (3, 0)
+          arrive at 0 waiting time:5 runtime 4
+Name T21 needed resource (2, 3)
+          arrive at 2 waiting time:5 runtime 10
+Name T22 needed resource (0, 4)
+          arrive at 2 waiting time:0 runtime 4
+Name T23 needed resource (2, 1)
+          arrive at 3 waiting time:0 runtime 4
+Name T31 needed resource (2, 3)
+          arrive at 18 waiting time:12 runtime 6
+Name T41 needed resource (2, 1)
+          arrive at 5 waiting time:10 runtime 4
+Name T42 needed resource (2, 1)
+          arrive at 7 waiting time:0 runtime 8
+Finished!

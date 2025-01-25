@@ -29,7 +29,7 @@ class RMS(SchedulingAlgorithm):
         bound = n*(2**(1/n)-1)*100 if n>0 else 100
         if self.utility >=bound:
             return True
-        elif self.utility >= bound:
+        elif self.utility >= 2* bound:
             raise Exception("Cannot do anything for this one!")
         return False
     

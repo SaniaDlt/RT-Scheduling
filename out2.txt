@@ -1,0 +1,577 @@
+Utility is = 116.66666666666667 and bound is 82.84271247461903
+Utility is = 116.66666666666667 and bound is 100.0
+Time : 1
+Sub1
+ Resources R1:1 R2:0
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(1, 4, Name T11 needed resource (1, 0) arrive at 0)]
+Running task: T11
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(2, 3), (0, 0), (0, 0)]
+Ready Queue: [(6, Name T32 needed resource (1, 1) arrive at 0 cycle 6)]
+Core 1:
+Running task: T31,Double,T31 Finished
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 83.33333333333334 and bound is 100.0
+Time : 2
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(2, 4, Name T11 needed resource (1, 0) arrive at 0)]
+Running task: T11
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:3 R2:9 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T32
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 83.33333333333334 and bound is 100
+Time : 3
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: [(3, 4, Name T11 needed resource (1, 0) arrive at 0)]
+Running task: T11
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:3 R2:9 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T32
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 83.33333333333334 and bound is 100
+Time : 4
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: T11 Finished!
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:3 R2:9 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T32
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 83.33333333333334 and bound is 100
+Time : 5
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:3 R2:9 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T32
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 83.33333333333334 and bound is 100
+Time : 6
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T32 Finished
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue [Name T41 needed resource (2, 1) arrive at 5]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle Depends on something!
+
+Utility is = 33.33333333333333 and bound is 100.0
+Time : 7
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:2 R2:7 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue [Name T41 needed resource (2, 1) arrive at 5]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 33.33333333333333 and bound is 100
+Time : 8
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31 Finished
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1) arrive at 5]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Utility is = 0.0 and bound is 100
+Utility is = 0.0 and bound is 100
+Time : 9
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1) arrive at 5]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Utility is = 0.0 and bound is 100
+Utility is = 0.0 and bound is 100
+Time : 10
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue [Name T41 needed resource (2, 1) arrive at 5]
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42
+
+Utility is = 0.0 and bound is 100
+Utility is = 0.0 and bound is 100
+Time : 11
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:0 R2:2
+Ready Queue: []
+Core 1:
+Running task: T21
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: [Name T41 needed resource (2, 1) arrive at 5]
+Core 1:
+Running task: idle
+Core 2:
+Running task: T42 Finished!
+
+Utility is = 0.0 and bound is 100
+Utility is = 0.0 and bound is 100
+Time : 12
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: T21 Finished!
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:0 R2:1
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41
+
+Utility is = 33.33333333333333 and bound is 100.0
+Time : 13
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:2 R2:7 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: T41 Finished!
+
+Utility is = 33.33333333333333 and bound is 100
+Time : 14
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: T31 Finished
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Utility is = 0.0 and bound is 100
+Utility is = 0.0 and bound is 100
+Time : 15
+Sub1
+ Resources R1:3 R2:3
+Waiting Queue []
+Core 1:
+Ready Queue: []
+Running task: idle
+Core 2:
+Ready Queue: []
+Running task: idle
+Core 3:
+Ready Queue: []
+Running task: idle
+
+Sub2
+ Resources R1:2 R2:5
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Sub3
+ Resources R1:4 R2:10 HardAllocation: [(0, 0), (0, 0), (0, 0)]
+Ready Queue: []
+Core 1:
+Running task: idle
+
+Sub4
+ Resources R1:2 R2:2
+Waiting Queue []
+Ready Queue: []
+Core 1:
+Running task: idle
+Core 2:
+Running task: idle
+
+Finished!

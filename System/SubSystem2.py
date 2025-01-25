@@ -6,7 +6,7 @@ from inputs import intrupt_handler
 from classes.ResourceManager import ResourceManager
 
 class SubSystem2:
-    def __init__(self,timestamp,resources:ResourceManager,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+    def __init__(self,timestamp,resources:ResourceManager,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore,in_min:Semaphore,in_sys:Semaphore):
         self.timestamp = timestamp
         self.ready_queue = ReadyQueue(SRTF)
         self.system_sem = Semaphore(0)
@@ -18,6 +18,8 @@ class SubSystem2:
         self.main_system_sem = mainsystem_sem
         self.my_sem = system_sem
         self.log_up = [0 for i in range(2)]
+        self.in_min = in_min
+        self.in_my = in_sys
         self.core1 = Core2(self.ready_queue,self.log_up,1,self.core_sem[0],self.system_sem,self.in_core[0],
                            self.in_sys,self.resources)
         self.core2 = Core2(self.ready_queue,self.log_up,2,self.core_sem[1],self.system_sem,self.in_core[1],
@@ -55,6 +57,10 @@ class SubSystem2:
         #Intermediate step
         self.in_sys.acquire()
         self.in_sys.acquire()
+        #Real time sync
+        self.in_min.release()
+        self.in_my.acquire()
+        #---
         self.in_core[0].release()
         self.in_core[1].release()
         #Ending work

@@ -17,7 +17,7 @@ class Core4:
         self.map = {}
         self.in_core =intermediate_core_sem
         self.in_sys = intermediate_sys_sem
-    
+        self.t=1
     def do_cylce(self):
         #Getting a porcess
         if self.process == None:
@@ -45,7 +45,7 @@ class Core4:
                 return
             self.process.allocate()
             
-        end =self.process.do_burst()
+        end =self.process.do_burst(self.t)
         self.pulse_sync()
         temp = self.process.name
         if end:
@@ -74,6 +74,7 @@ class Core4:
         while True:
             self.core_sem.acquire()
             self.do_cylce()
+            self.t+=1
             self.system_sem.release()
     
     def pulse_sync(self):

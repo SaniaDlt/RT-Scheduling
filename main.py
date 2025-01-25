@@ -12,5 +12,7 @@ from System.MainSystem import MainSystem
 #test_sub_system1('input.txt',20) #Simple Test pass! #Deadlock pass #Preempt pass
 #test_sub_system1('input.txt',20) #Simple test Done! # BeforeAfter Done!
 
-#TODO Running the main system!
-MainSystem('input.txt').start()
+#Running the main system!
+#Simple test pass
+#Hard test ? 
+MainSystem('test1.txt').start()

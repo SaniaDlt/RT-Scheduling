@@ -13,6 +13,8 @@ class Core3:
         self.hard_time =False
         self.hard_allocate =False
         self.second = False
+        self.temp =""
+        self.t=1
     def do_cycle(self):
         self.check_preempt()
         #Checking for realtime!
@@ -41,22 +43,29 @@ class Core3:
             self.hard_allocate =True
         
         self.process.running()
-        end = self.process.do_burst()
-        temp = self.process.name
+        end = self.process.do_burst(self.t)
+        if not self.second:
+            self.temp = self.process.name
+            self.system_sem.release()
+            self.core_sem.acquire()
+        else :
+            self.temp+=","+self.process.name
         if end:
             need = self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1]) 
             self.process.deallocate()
             self.ready_queue.algorithm.update_utility(self.process)
             self.process = None
+            self.temp+=" Finished"
             
         if self.hard_time and self.hard_allocate and not self.second:
             #Do a cycle again
             self.second=True
+            self.temp+=",Double"
             return self.do_cycle()
             
         self.second = False
-        self.log[0] = f"Running task: {temp}"
+        self.log[0] = f"Running task: {self.temp}"
 
     def check_preempt(self):
         if self.process == None: return
@@ -76,4 +85,5 @@ class Core3:
         while True:
             self.core_sem.acquire()
             self.do_cycle()
+            self.t+=1
             self.system_sem.release()

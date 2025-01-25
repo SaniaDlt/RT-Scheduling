@@ -19,6 +19,7 @@ class Core1:
         self.min_burst=None
         self.in_core = intermediate_core
         self.in_sys = intermediate_system
+        self.t=1
 
     
     def do_cylce(self):
@@ -50,7 +51,7 @@ class Core1:
                 return
             self.process.allocate()
         self.process.running()
-        end =self.process.do_burst()
+        end =self.process.do_burst(self.t)
         self.pulse_sync()
         #To sync the running pulse
         temp = self.process.name
@@ -83,6 +84,7 @@ class Core1:
         while True:
             self.core_sem.acquire()
             self.do_cylce()
+            self.t+=1
             self.system_sem.release()
 
     def pulse_sync(self):

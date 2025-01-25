@@ -12,13 +12,17 @@ class Process:
         self.done_bursts=0
         self.state = None
         self.count = 0
+        self.last_run_time = self.arrive
+        self.run_time =0
+        self.waiting_time = 0
 
     def __lt__(self, other):
         return self.burst < other.burst
 
     def allocate(self):
         self.isAllocated = True
-        
+
+
     def deallocate(self):
         self.isAllocated = False
 
@@ -34,9 +38,12 @@ class Process:
     def get_resources(self):
         return self.need
     
-    def do_burst(self):
+    def do_burst(self,t):
         if self.isAllocated  and self.state== State.RUNNING:
             self.done_bursts+=1
+            self.run_time+=1
+            self.waiting_time += t-self.last_run_time-1
+            self.last_run_time=t
             if self.done_bursts == self.burst:
                 return True
             else: return False
@@ -44,7 +51,8 @@ class Process:
             raise Exception("A process should  be allocated and be in running state")
     
     def __str__(self):
-        return f"Name {self.name} needed resource {self.get_resources()} arrive at {self.arrive}"
+        return f"""Name {self.name} needed resource {self.get_resources()}
+          arrive at {self.arrive} waiting time:{self.waiting_time} runtime {self.run_time}"""
     def __repr__(self):
         return self.__str__()     
 
@@ -62,15 +70,13 @@ class PeriodicProcess(Process):
         self.cycle = cycle
         self.c_count = cylce_count
     
-    def do_burst(self):
-        r = super().do_burst()
+    def do_burst(self,t):
+        r = super().do_burst(t)
         if r :
             self.done_bursts =0
+            self.arrive += self.cycle # Only for valid print
+            self.last_run_time =self.arrive
         return r
-    def __str__(self):
-        return f"Name {self.name} needed resource {self.get_resources()} arrive at {self.arrive} cycle {self.cycle}"
-    def __repr__(self):
-        return self.__str__()   
 
     
 
@@ -81,9 +87,9 @@ class DependentProcess(Process):
         self.depend_name = depends_on if depends_on != '-' else None
         self.broke = False
 
-    def do_burst(self):
+    def do_burst(self,t):
         self.broke=False
-        r = super().do_burst()
+        r = super().do_burst(t)
         if r:
             rnd = random.random()
             if rnd<=0.3:

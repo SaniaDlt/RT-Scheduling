@@ -8,7 +8,7 @@ from inputs import intrupt_handler
 
 class SubSystem4:
     def __init__(self,timestamp,resources:ResourceManager,
-                 log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+                 log_low,mainsystem_sem:Semaphore,system_sem:Semaphore,in_min:Semaphore,in_sys:Semaphore):
         self.timestamp = timestamp
         self.waiting_queue = WaitingQueue(resources)
         self.ready_queue = ReadyQueue(FCFS)
@@ -21,7 +21,8 @@ class SubSystem4:
         self.main_system_sem = mainsystem_sem
         self.my_sem = system_sem
         self.log_up = [0 for i in range(2)]
-        
+        self.in_min = in_min
+        self.in_my = in_sys
         self.cores = [
             Core4(self.ready_queue,self.waiting_queue,self.log_up,resources,self.core_sem[0],
                   self.system_sem,self.in_core[0],self.in_sys,1),
@@ -61,6 +62,9 @@ class SubSystem4:
         #Intermediate step
         self.in_sys.acquire()
         self.in_sys.acquire()
+        #Realtime sync
+        self.in_min.release()
+        self.in_my.acquire()
         self.in_core[0].release()
         self.in_core[1].release()
         #Ending work

@@ -9,7 +9,7 @@ import heapq
 
 class SubSystem1:
     def __init__(self,timestamp,resources:ResourceManager,
-                 log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+                 log_low,mainsystem_sem:Semaphore,system_sem:Semaphore,in_min:Semaphore,in_sys:Semaphore):
         self.timestamp = timestamp
         self.waiting_queue = WaitingQueue(resources)
         self.ready_queue = [ReadyQueue(WRR),ReadyQueue(WRR),ReadyQueue(WRR)]
@@ -23,7 +23,8 @@ class SubSystem1:
         self.my_sem = system_sem
         self.log_up = [0 for i in range(3)]
         self.tresh=2
-        
+        self.in_min = in_min
+        self.in_my = in_sys
         self.cores = [
             Core1(self.ready_queue[0],self.waiting_queue,self.log_up,resources,self.core_sem[0],self.system_sem,
                   self.in_core[0],self.in_sys,1),
@@ -51,7 +52,6 @@ class SubSystem1:
             #Starting new time
             self.intrupt_hander()
             self.load_balance()
-            print("End loadbalance")
             #Sync cores
             self.core_sem[0].release()
             self.core_sem[1].release()
@@ -106,6 +106,10 @@ class SubSystem1:
         self.in_sys.acquire()
         self.in_sys.acquire()
         self.in_sys.acquire()
+        #To sync realtime
+        self.in_min.release()
+        self.in_my.acquire()
+        #---
         self.in_core[0].release()
         self.in_core[1].release()
         self.in_core[2].release()

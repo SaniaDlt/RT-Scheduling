@@ -6,7 +6,7 @@ from inputs import intrupt_handler
 from classes.ResourceManager import RealTimeRM
 
 class SubSystem3:
-    def __init__(self,timestamp,resources:RealTimeRM,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+    def __init__(self,timestamp,resources:RealTimeRM,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore,in_min:Semaphore,in_sys:Semaphore):
         self.timestamp = timestamp
         self.ready_queue = ReadyQueue(RMS)
         self.system_sem = Semaphore(0)
@@ -18,7 +18,8 @@ class SubSystem3:
         self.log_up = [0 for i in range(1)]
         self.core = Core3(self.ready_queue,self.log_up,self.core_sem,self.system_sem,self.resources)
         self.time = 0
-    
+        self.in_min = in_min
+        self.in_my = in_sys
     def intrupt_hander(self):
         event = intrupt_handler(self.timestamp,self.time)
         if event != None:
@@ -36,8 +37,15 @@ class SubSystem3:
             #Starting new time
             self.intrupt_hander()
             #Sync cores
+            
+            
             self.core_sem.release()
-
+            self.system_sem.acquire()
+            #To sync pulses
+            self.in_min.release()
+            self.in_my.acquire()
+            
+            self.core_sem.release()
             self.system_sem.acquire()
             #After cores
             self.concat_message()
