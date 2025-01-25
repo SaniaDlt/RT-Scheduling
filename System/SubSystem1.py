@@ -98,7 +98,6 @@ class SubSystem1:
         least_process = max(heap)
         heap.remove(least_process)
         heapq.heapify(heap)
-        print(heap)
         return least_process
 
     def inter_mediate_sync(self):
