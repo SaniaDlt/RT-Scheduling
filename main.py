@@ -15,4 +15,4 @@ from System.MainSystem import MainSystem
 #Running the main system!
 #Simple test pass
 #Hard test ? 
-MainSystem('test1.txt').start()
+MainSystem('input.txt').start()
