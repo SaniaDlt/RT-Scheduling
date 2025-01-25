@@ -22,23 +22,23 @@ def read_file(path):
                 process = line.strip().split(" ")
                 if j==0:
                     sub_systems[j].append(
-                        Process(process[0],int(process[1]),int(process[2]),int(process[3]),int(process[4])))
+                        Process(process[0],int(process[1]),(int(process[2]),int(process[3])),int(process[4]),int(process[5])))
                 elif j==1:
                     sub_systems[j].append(
-                        Process(process[0],int(process[1]),int(process[2]),int(process[3])))
+                        Process(process[0],int(process[1]),(int(process[2]),int(process[3])),int(process[4])))
                 elif j==2:
                     sub_systems[j].append(
                         PeriodicProcess(process[0],int(process[1])
-                                        ,int(process[2]),int(process[3]),int(process[4]),int(process[5])))
+                                        ,(int(process[2]),int(process[3])),int(process[4]),int(process[5]),int(process[6])))
                 elif j==3:
                     sub_systems[j].append(
                         DependentProcess(process[0],int(process[1])
-                                     ,int(process[2]),int(process[3]),process[4]))
+                                     ,(int(process[2]),int(process[3])),int(process[4]),process[5]))
 
     return resources,sub_systems
 
 def intrupt_handler(timestamp:list,t):
-    if len(timestamp) <t or timestamp[t]==0: return None
+    if len(timestamp) <=t or timestamp[t]==0: return None
     return timestamp[t]
                 
 def generate_timestamp(subsystem_list):
@@ -46,7 +46,7 @@ def generate_timestamp(subsystem_list):
     for p in subsystem_list:
         temp = max(temp,p.arrive)
     
-    timestamp = [0 for i in range(temp)]
+    timestamp = [0 for i in range(temp+1)]
     
     for p in subsystem_list:
         i = p.arrive
@@ -61,13 +61,13 @@ def generate_timestamp_periodic(subsystem_list):
     for p in subsystem_list:
         temp = max(temp,p.arrive + p.cycle * p.c_count)
     
-    timestamp = [0 for i in range(temp)]
+    timestamp = [0 for i in range(temp+1)]
     
     for p in subsystem_list:
         i = p.arrive
-        for j in range(1,p.c_count+1):
-            if timestamp[i+j*p.cylce] == 0:
-                timestamp[i+j*p.cylce] = []
-            timestamp[i+j*p.cylce].append(p)
+        for j in range(p.c_count):
+            if timestamp[i+j*p.cycle] == 0:
+                timestamp[i+j*p.cycle] = []
+            timestamp[i+j*p.cycle].append(p)
 
     return timestamp

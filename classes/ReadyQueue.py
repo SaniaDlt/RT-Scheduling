@@ -6,10 +6,9 @@ class ReadyQueue:
         self.algorithm = algorithm_class(self)
     
     def get_process(self):
-        if not self.queue.empty():
-            process = self.algorithm.choose()
-            return process
-        return None
+        process = self.algorithm.choose()
+        return process
+        
     
     def schedule_process(self,p):
         p.ready()

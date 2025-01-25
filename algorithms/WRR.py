@@ -12,7 +12,7 @@ class WRR:
         if 0<len(self.queue):
             p1,_, process = heapq.heappop(self.queue)
             return p1,process
-        return None
+        return None,None
     
     def schedule(self,first_priority ,p: Process):
         heapq.heappush(self.queue,(first_priority, p.burst, p))

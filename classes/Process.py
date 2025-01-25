@@ -13,6 +13,8 @@ class Process:
         self.state = None
         self.count = 0
 
+    def __lt__(self, other):
+        return self.burst < other.burst
 
     def allocate(self):
         self.isAllocated = True
@@ -42,11 +44,9 @@ class Process:
             raise Exception("A process should  be allocated and be in running state")
     
     def __str__(self):
-        #TODO print the process!
-        #Contains ending time
-        #Cointains waiting time
-        # Contain the core number
-        pass
+        return f"Name {self.name} needed resource {self.get_resources()} arrive at {self.arrive}"
+    def __repr__(self):
+        return self.__str__()     
 
 class State(Enum):
     RUNNING=0
@@ -67,7 +67,10 @@ class PeriodicProcess(Process):
         if r :
             self.done_bursts =0
         return r
-
+    def __str__(self):
+        return f"Name {self.name} needed resource {self.get_resources()} arrive at {self.arrive} cycle {self.cycle}"
+    def __repr__(self):
+        return self.__str__()   
 
     
 
@@ -75,8 +78,9 @@ class PeriodicProcess(Process):
 class DependentProcess(Process):
     def __init__(self, name, burst, resources, arrive,depends_on:str):
         super().__init__(name, burst, resources, arrive)
-        self.depend_name = depends_on
+        self.depend_name = depends_on if depends_on != '-' else None
         self.broke = False
+
     def do_burst(self):
         self.broke=False
         r = super().do_burst()
@@ -86,7 +90,7 @@ class DependentProcess(Process):
                 self.done_bursts=0
                 self.broke =True
                 return False
+            return True
 
     def check_broke(self):
         return self.broke
-        

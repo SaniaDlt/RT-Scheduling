@@ -23,6 +23,8 @@ class ResourceManager:
     def __str__(self):
         with self.lock:
             return f"Resources R1:{self.r1} R2:{self.r2}"
+    def __repr__(self):
+        return self.__str__() 
 
 class RealTimeRM(ResourceManager):
     def __init__(self, r1, r2,rm1:ResourceManager,rm2:ResourceManager,rm4:ResourceManager):

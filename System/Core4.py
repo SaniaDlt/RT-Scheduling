@@ -4,7 +4,8 @@ class Core4:
     def __init__(self, ready_queue:ReadyQueue.ReadyQueue,
                  waiting_queue:WaitingQueue.WaitingQueue,log:list
                  ,rm:ResourceManager.ResourceManager,
-                 core_semaphore:Semaphore,system_semaphore:Semaphore,core_num):
+                 core_semaphore:Semaphore,system_semaphore:Semaphore,
+                 intermediate_core_sem:Semaphore,intermediate_sys_sem:Semaphore,core_num):
         self.ready_queue = ready_queue
         self.log = log
         self.waiting_queue = waiting_queue
@@ -14,6 +15,8 @@ class Core4:
         self.process=None
         self.core_num = core_num
         self.map = {}
+        self.in_core =intermediate_core_sem
+        self.in_sys = intermediate_sys_sem
     
     def do_cylce(self):
         #Getting a porcess
@@ -21,28 +24,31 @@ class Core4:
             self.process = self.ready_queue.get_process()
             if self.process == None:
                 self.log[self.core_num-1] = "Running task: idle"
+                self.pulse_sync()
                 return
             
 
         self.process.running()
         #Check dependency
-        if not self.process.depend_name in self.map.keys():
+        if self.process.depend_name != None and not self.process.depend_name in self.map.keys() :
             self.waiting_queue.queue.put(self.process)
             self.log[self.core_num-1] = "Running task: idle Depends on something!"
             self.process =None
+            self.pulse_sync()
             return
-
-        isAllocated = self.waiting_queue.put_process(self.process)
-        if not isAllocated:
-            self.log[self.core_num-1] = "Running task: idle Not enought resource"
-            self.process =None
-            return
-        
+        if not self.process.isAllocated:
+            isAllocated = self.waiting_queue.put_process(self.process)
+            if not isAllocated:
+                self.log[self.core_num-1] = "Running task: idle Not enought resource"
+                self.process =None
+                self.pulse_sync()
+                return
+            self.process.allocate()
+            
         end =self.process.do_burst()
+        self.pulse_sync()
         temp = self.process.name
-        self.quantom-=1
         if end:
-            self.quantom=0
             need = self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1])
             self.process.deallocate()
@@ -50,6 +56,8 @@ class Core4:
             self.process =None
             temp+=" Finished!"
             self.squash_waiting()
+            self.log[self.core_num-1] = f"Running task: {temp}"
+            return
 
         if self.process.check_broke():
             temp+=" Task Broken! Should run again"
@@ -60,10 +68,15 @@ class Core4:
         queue=self.waiting_queue.queue
         while not queue.empty():
             p = queue.get()
-            self.ready_queue.algorithm.schedule(self.first_priority+1,p)
+            self.ready_queue.schedule_process(p)
 
     def running(self):
         while True:
             self.core_sem.acquire()
             self.do_cylce()
             self.system_sem.release()
+    
+    def pulse_sync(self):
+        # Do intermediate step!
+        self.in_sys.release()
+        self.in_core.acquire()     

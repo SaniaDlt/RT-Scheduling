@@ -5,12 +5,14 @@ from classes.Process import Process
 
 class FCFS(SchedulingAlgorithm):
     def __init__(self, ready_queue: ReadyQueue):
-        self.queue = Queue()
+        self.queue = []
         ready_queue.queue = self.queue
         
     def choose(self):
-        process = self.queue.get()
-        return process
+        if 0<len(self.queue):
+            process = self.queue.pop(0)
+            return process
+        return None
     
     def schedule(self, p: Process):
-        self.queue.put(p)
+        self.queue.append(p)

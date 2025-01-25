@@ -1,12 +1,12 @@
 from queue import Queue
 from .ResourceManager import ResourceManager
 from .Process import Process
-
+from threading import Lock
 class WaitingQueue:
     def __init__(self, resource: ResourceManager): 
         self.queue = Queue()
-        self.queue.pop
         self.resource = resource
+        self.lock = Lock()
 
         
     # def get_process(self):
@@ -17,11 +17,14 @@ class WaitingQueue:
     #     return None
     
     def put_process(self, process: Process):
-        if process.ready():
-            resource_available = self.resource.request(process.resources[0], process.resources[1])
+        with self.lock:
+            resource_available = self.resource.request(process.need[0], process.need[1])
+            print(self.resource)
             if not resource_available:
                 process.waiting()
                 self.queue.put(process)
                 return False
             process.allocate()
             return True
+    def __str__(self):
+        return f"Waiting Queue {list(self.queue.queue)}"

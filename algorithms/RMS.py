@@ -10,9 +10,10 @@ class RMS(SchedulingAlgorithm):
         self.utility =0
            
     def choose(self):
-        _, process = heapq.heappop(self.queue)
-        
-        return process
+        if 0<len(self.queue):
+            _, process = heapq.heappop(self.queue)
+            return process
+        return None
     
     def schedule(self, p: PeriodicProcess):
         if p.done_bursts ==0:

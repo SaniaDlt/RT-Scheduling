@@ -14,18 +14,23 @@ class SubSystem1:
         self.waiting_queue = WaitingQueue(resources)
         self.ready_queue = [ReadyQueue(WRR),ReadyQueue(WRR),ReadyQueue(WRR)]
         self.system_sem = Semaphore(0)
-        self.core_sem = Semaphore(0)
+        self.core_sem = [Semaphore(0),Semaphore(0),Semaphore(0)]
+        self.in_sys= Semaphore(0)
+        self.in_core = [Semaphore(0),Semaphore(0),Semaphore(0)]
         self.resources = resources
         self.log_low = log_low
         self.main_system_sem = mainsystem_sem
         self.my_sem = system_sem
         self.log_up = [0 for i in range(3)]
-        self.tresh=3
+        self.tresh=2
         
         self.cores = [
-            Core1(self.ready_queue[0],self.waiting_queue,self.log_up,resources,self.core_sem,self.system_sem,1),
-            Core1(self.ready_queue[1],self.waiting_queue,self.log_up,resources,self.core_sem,self.system_sem,2),
-            Core1(self.ready_queue[2],self.waiting_queue,self.log_up,resources,self.core_sem,self.system_sem,3)
+            Core1(self.ready_queue[0],self.waiting_queue,self.log_up,resources,self.core_sem[0],self.system_sem,
+                  self.in_core[0],self.in_sys,1),
+            Core1(self.ready_queue[1],self.waiting_queue,self.log_up,resources,self.core_sem[1],self.system_sem
+                  ,self.in_core[1],self.in_sys,2),
+            Core1(self.ready_queue[2],self.waiting_queue,self.log_up,resources,self.core_sem[2],self.system_sem
+                  ,self.in_core[2],self.in_sys,3)
         ]
         self.time = 0
     
@@ -34,21 +39,24 @@ class SubSystem1:
         if event != None:
             for p in event:
                 p.ready()
-                self._push(p.process_num-1,p)
+                self._push(p.processor_num-1,p)
         self.time+=1
     
     def running(self):
         for c in self.cores:
-            Thread(target=c.do_cylce).start()
+            Thread(target=c.running).start()
 
         while True:
             self.my_sem.acquire()
             #Starting new time
             self.intrupt_hander()
             self.load_balance()
+            print("End loadbalance")
             #Sync cores
-            self.core_sem.release(3)
-
+            self.core_sem[0].release()
+            self.core_sem[1].release()
+            self.core_sem[2].release()
+            self.inter_mediate_sync()
             self.system_sem.acquire()
             self.system_sem.acquire()
             self.system_sem.acquire()
@@ -77,21 +85,31 @@ class SubSystem1:
             min_queue = 2 if max_queue==0 else 0
         #pop and push
         for i in range(diffrence):
-            least_priority_process =self._pop(max_queue)
+            _,_,least_priority_process =self._pop(max_queue)
             self._push(min_queue,least_priority_process)
         return self.load_balance()
 
     def _push(self,process_num,p):
         priority = self.cores[process_num].first_priority +1
-        self.ready_queue[process_num].algorithm.schedule(self,priority,p)
+        self.ready_queue[process_num].algorithm.schedule(priority,p)
 
     def _pop(self,process_num):
         heap = self.ready_queue[process_num].queue
-        _,_,least_process = max(heap)
+        least_process = max(heap)
         heap.remove(least_process)
         heapq.heapify(heap)
+        print(heap)
         return least_process
 
+    def inter_mediate_sync(self):
+        #Intermediate step
+        self.in_sys.acquire()
+        self.in_sys.acquire()
+        self.in_sys.acquire()
+        self.in_core[0].release()
+        self.in_core[1].release()
+        self.in_core[2].release()
+        #Ending work
     
     def concat_message(self):
         result = f"Sub1\n {self.resources}\n{self.waiting_queue}\n"
@@ -99,6 +117,6 @@ class SubSystem1:
         for m in self.log_up:
             result+=f"Core {i}:\n"
             result+=f"{self.ready_queue[i-1]}"+"\n"
-            result+=m+"\n"
+            result+=str(m)+"\n"
             i+=1
         self.log_low[0]= result

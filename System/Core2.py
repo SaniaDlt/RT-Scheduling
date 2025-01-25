@@ -1,7 +1,9 @@
 from threading import Semaphore
 from classes.ResourceManager import ResourceManager
 class Core2:
-    def __init__(self,ready_queue,log,core_num,core_semaphore:Semaphore,system_semaphore:Semaphore,resource_manager:ResourceManager):
+    def __init__(self,ready_queue,log,core_num,core_semaphore:Semaphore,
+                 system_semaphore:Semaphore,intermediate_core_sem:Semaphore,intermediate_sys_sem:Semaphore
+                 ,resource_manager:ResourceManager):
         self.ready_queue = ready_queue
         self.process =None
         self.log = log
@@ -10,6 +12,8 @@ class Core2:
         self.system_sem = system_semaphore
         self.resource_manager = resource_manager
         self.priority =None
+        self.in_core =intermediate_core_sem
+        self.in_sys = intermediate_sys_sem
     
     def do_cycle(self):
         self.check_preempt()
@@ -22,6 +26,7 @@ class Core2:
                     self.process.allocate()
             else:
                 self.log[self.core_num-1] = "Running task: idle"
+                self.pulse_sync()
                 return
         
         
@@ -37,12 +42,15 @@ class Core2:
             self.priority =None
             #----
             self.log[self.core_num-1] = f"Running task:Idle DeadLock! No resource for the process!"
+            self.pulse_sync()
             return
+        self.pulse_sync()
         temp = self.process.name
         if end:
             need=self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1]) 
             self.process.deallocate()
+            temp+=" Finished!"
             self.process = None
                 
         #Logging
@@ -70,5 +78,9 @@ class Core2:
             self.core_sem.acquire()
             self.do_cycle()
             self.system_sem.release()
-            
+
+    def pulse_sync(self):
+        # Do intermediate step!
+        self.in_sys.release()
+        self.in_core.acquire()       
 
