@@ -1,14 +1,17 @@
-from classes.ReadyQueue import ReadyQueue
-from algorithms.SRTF import SRTF
-from .Core2 import Core2
-from threading import Semaphore,Thread
-from inputs import intrupt_handler
 from classes.ResourceManager import ResourceManager
+from threading import Semaphore,Thread
+from classes.ReadyQueue import ReadyQueue
+from classes.WaitingQueue import WaitingQueue
+from algorithms.FCFS import FCFS
+from .Core4 import Core4
+from inputs import intrupt_handler
 
-class SubSystem2:
-    def __init__(self,timestamp,resources:ResourceManager,log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
+class SubSystem4:
+    def __init__(self,timestamp,resources:ResourceManager,
+                 log_low,mainsystem_sem:Semaphore,system_sem:Semaphore):
         self.timestamp = timestamp
-        self.ready_queue = ReadyQueue(SRTF)
+        self.waiting_queue = WaitingQueue(resources)
+        self.ready_queue = ReadyQueue(FCFS)
         self.system_sem = Semaphore(0)
         self.core_sem = Semaphore(0)
         self.resources = resources
@@ -16,23 +19,26 @@ class SubSystem2:
         self.main_system_sem = mainsystem_sem
         self.my_sem = system_sem
         self.log_up = [0 for i in range(2)]
-        self.core1 = Core2(self.ready_queue,self.log_up,1,self.core_sem,self.system_sem,self.resources)
-        self.core2 = Core2(self.ready_queue,self.log_up,2,self.core_sem,self.system_sem,self.resources)
+        
+        self.cores = [
+            Core4(self.ready_queue[0],self.waiting_queue,self.log_up,resources,self.core_sem,self.system_sem,1),
+            Core4(self.ready_queue[1],self.waiting_queue,self.log_up,resources,self.core_sem,self.system_sem,2),
+
+        ]
         self.time = 0
     
     def intrupt_hander(self):
         event = intrupt_handler(self.timestamp,self.time)
         if event != None:
-            for p in event:   
+            for p in event:
                 p.ready()
                 self.ready_queue.schedule_process(p)
         self.time+=1
     
     def running(self):
-        core1 = Thread(target=self.core1.running)
-        core2 = Thread(target=self.core2.running)
-        core1.start()
-        core2.start()
+        for c in self.cores:
+            Thread(target=c.do_cylce).start()
+
         while True:
             self.my_sem.acquire()
             #Starting new time
@@ -46,15 +52,13 @@ class SubSystem2:
             self.concat_message()
             self.main_system_sem.release()
 
+    
     def concat_message(self):
-        result = f"Sub2\n {self.resources}\n{self.ready_queue}\n"
+        result = f"Sub1\n {self.resources}\n{self.waiting_queue}\n"
         i=1
         for m in self.log_up:
             result+=f"Core {i}:\n"
+            result+=f"{self.ready_queue[i-1]}"+"\n"
             result+=m+"\n"
             i+=1
-        self.log_low[1]= result
-
-
-
-
+        self.log_low[0]= result

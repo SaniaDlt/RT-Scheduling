@@ -49,6 +49,7 @@ class Core2:
         self.log[self.core_num-1] = f"Running task: {temp}"
         
     def check_preempt(self):
+        if self.process == None : return
         p = self.process.burst - self.process.done_bursts 
         if 0 < len(self.ready_queue.queue) and p > self.ready_queue.queue[0][0]:
             #switch out:

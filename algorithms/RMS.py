@@ -7,15 +7,28 @@ class RMS(SchedulingAlgorithm):
     def __init__(self, ready_queue: ReadyQueue):
         self.queue = []
         ready_queue.queue = self.queue
+        self.utility =0
            
     def choose(self):
         _, process = heapq.heappop(self.queue)
+        
         return process
     
     def schedule(self, p: PeriodicProcess):
-        priority = 1 / p.cycle
+        if p.done_bursts ==0:
+            self.utility+=p.burst/p.cycle *100
+        priority =  p.cycle
         heapq.heappush(self.queue,(priority, p))
     
+    def update_utility(self,process):
+        self.utility-=process.burst/process.cycle *100
+
     def check_scheduling(self):
-        pass
+        n = len(self.queue)
+        bound = n*(2**(1/n)-1)*100
+        if self.utility >=bound:
+            return True
+        elif self.utility >= bound:
+            raise Exception("Cannot do anything for this one!")
+        return False
     

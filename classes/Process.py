@@ -1,6 +1,6 @@
 import numpy as np
 from enum import Enum
-
+import random
 class Process:
     def __init__(self,name:str,burst:int,resources:np.array,arrive:int,processor=1):
         self.name = name
@@ -61,11 +61,32 @@ class PeriodicProcess(Process):
         super().__init__(name, burst, resources, arrive)
         self.cycle = cycle
         self.c_count = cylce_count
+    
+    def do_burst(self):
+        r = super().do_burst()
+        if r :
+            self.done_bursts =0
+        return r
+
+
+    
 
 #Dependent process
 class DependentProcess(Process):
     def __init__(self, name, burst, resources, arrive,depends_on:str):
         super().__init__(name, burst, resources, arrive)
         self.depend_name = depends_on
+        self.broke = False
+    def do_burst(self):
+        self.broke=False
+        r = super().do_burst()
+        if r:
+            rnd = random.random()
+            if rnd<=0.3:
+                self.done_bursts=0
+                self.broke =True
+                return False
 
+    def check_broke(self):
+        return self.broke
         

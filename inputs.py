@@ -56,3 +56,18 @@ def generate_timestamp(subsystem_list):
 
     return timestamp
                 
+def generate_timestamp_periodic(subsystem_list):
+    temp = 0
+    for p in subsystem_list:
+        temp = max(temp,p.arrive + p.cycle * p.c_count)
+    
+    timestamp = [0 for i in range(temp)]
+    
+    for p in subsystem_list:
+        i = p.arrive
+        for j in range(1,p.c_count+1):
+            if timestamp[i+j*p.cylce] == 0:
+                timestamp[i+j*p.cylce] = []
+            timestamp[i+j*p.cylce].append(p)
+
+    return timestamp
