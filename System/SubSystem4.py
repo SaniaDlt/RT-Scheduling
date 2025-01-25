@@ -23,11 +23,12 @@ class SubSystem4:
         self.log_up = [0 for i in range(2)]
         self.in_min = in_min
         self.in_my = in_sys
+        self.dones=  []
         self.cores = [
             Core4(self.ready_queue,self.waiting_queue,self.log_up,resources,self.core_sem[0],
-                  self.system_sem,self.in_core[0],self.in_sys,1),
+                  self.system_sem,self.in_core[0],self.in_sys,1,self.dones),
             Core4(self.ready_queue,self.waiting_queue,self.log_up,resources,self.core_sem[1],self.system_sem,
-                  self.in_core[1],self.in_sys,2),
+                  self.in_core[1],self.in_sys,2,self.dones),
 
         ]
         self.time = 0

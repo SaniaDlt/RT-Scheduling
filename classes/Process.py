@@ -100,3 +100,6 @@ class DependentProcess(Process):
 
     def check_broke(self):
         return self.broke
+    def __str__(self):
+        return f"""Name {self.name} needed resource {self.get_resources()}
+          arrive at {self.arrive} waiting time:{self.waiting_time} runtime {self.run_time} depens on {self.depend_name}"""

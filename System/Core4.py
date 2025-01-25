@@ -5,7 +5,7 @@ class Core4:
                  waiting_queue:WaitingQueue.WaitingQueue,log:list
                  ,rm:ResourceManager.ResourceManager,
                  core_semaphore:Semaphore,system_semaphore:Semaphore,
-                 intermediate_core_sem:Semaphore,intermediate_sys_sem:Semaphore,core_num):
+                 intermediate_core_sem:Semaphore,intermediate_sys_sem:Semaphore,core_num,dones):
         self.ready_queue = ready_queue
         self.log = log
         self.waiting_queue = waiting_queue
@@ -14,7 +14,7 @@ class Core4:
         self.system_sem = system_semaphore
         self.process=None
         self.core_num = core_num
-        self.map = {}
+        self.dones =dones
         self.in_core =intermediate_core_sem
         self.in_sys = intermediate_sys_sem
         self.t=1
@@ -30,7 +30,7 @@ class Core4:
 
         self.process.running()
         #Check dependency
-        if self.process.depend_name != None and not self.process.depend_name in self.map.keys() :
+        if self.process.depend_name != None and not self.process.depend_name in self.dones :
             self.waiting_queue.queue.put(self.process)
             self.log[self.core_num-1] = "Running task: idle Depends on something!"
             self.process =None
@@ -52,7 +52,7 @@ class Core4:
             need = self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1])
             self.process.deallocate()
-            self.map[temp]=True
+            self.dones.append(temp)
             self.process =None
             temp+=" Finished!"
             self.squash_waiting()
