@@ -1,14 +1,14 @@
 from inputs import read_file,generate_timestamp,generate_timestamp_periodic
-from SubSystem2 import SubSystem2
-from SubSystem1 import SubSystem1
-from SubSystem3 import SubSystem3
-from SubSystem4 import SubSystem4
+from .SubSystem2 import SubSystem2
+from .SubSystem1 import SubSystem1
+from .SubSystem3 import SubSystem3
+from .SubSystem4 import SubSystem4
 from threading import Semaphore,Thread
 from classes.ResourceManager import RealTimeRM
 class MainSystem:
     def __init__(self,input_path):
         self.resources , sub_systems = read_file(input_path)
-        self.log = ["" for i in range(4)]
+        self.log = ["a" for i in range(4)]
         self.mainsystem_sem = Semaphore(0)
         self.systems_sem = [Semaphore(0),Semaphore(0),Semaphore(0),Semaphore(0)]
         self.rt_rm = RealTimeRM(self.resources[2].r1,self.resources[2].r2,
@@ -37,15 +37,23 @@ class MainSystem:
             for i in range(4):
                 self.mainsystem_sem.acquire()
             self.t+=1
-            self.print_()
+            if self.print_():
+                break
+        
+        print("Finished!")
             
 
     
     def print_(self):
+        count_process = 8
         print(f"Time : {self.t}")
         for i in self.log:
             print(i)
         
+        n=sum(i.lower().count("idle") for i in self.log)    
+        if n==count_process and self.t > 10:
+            return True
+        return False
 
         
 

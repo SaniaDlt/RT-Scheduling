@@ -66,10 +66,10 @@ class SubSystem4:
         #Ending work
     
     def concat_message(self):
-        result = f"Sub1\n {self.resources}\n{self.waiting_queue}\n{self.ready_queue}\n"
+        result = f"Sub4\n {self.resources}\n{self.waiting_queue}\n{self.ready_queue}\n"
         i=1
         for m in self.log_up:
             result+=f"Core {i}:\n"
             result+=m+"\n"
             i+=1
-        self.log_low[0]= result
+        self.log_low[3]= result

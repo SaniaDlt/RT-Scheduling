@@ -12,8 +12,8 @@ class RMS(SchedulingAlgorithm):
     def choose(self):
         if 0<len(self.queue):
             _, process = heapq.heappop(self.queue)
-            return process
-        return None
+            return _,process
+        return None,None
     
     def schedule(self, p: PeriodicProcess):
         if p.done_bursts ==0:
@@ -26,7 +26,7 @@ class RMS(SchedulingAlgorithm):
 
     def check_scheduling(self):
         n = len(self.queue)
-        bound = n*(2**(1/n)-1)*100
+        bound = n*(2**(1/n)-1)*100 if n>0 else 100
         if self.utility >=bound:
             return True
         elif self.utility >= bound:

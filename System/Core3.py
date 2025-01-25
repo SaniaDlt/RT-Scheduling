@@ -32,7 +32,8 @@ class Core3:
                     raise Exception("Not enough")
                 self.process.allocate()
             else:
-                self.log[self.core_num-1] = "Running task: idle"
+                self.log[0] = "Running task: idle"
+                return
         #Getting resource for two cycles
         if self.hard_time and not self.hard_allocate:
             need = self.process.get_resources()
@@ -46,7 +47,7 @@ class Core3:
             need = self.process.get_resources()
             self.resource_manager.reallocate(need[0],need[1]) 
             self.process.deallocate()
-            self.ready_queue.algorithm.update(self.process)
+            self.ready_queue.algorithm.update_utility(self.process)
             self.process = None
             
         if self.hard_time and self.hard_allocate and not self.second:
