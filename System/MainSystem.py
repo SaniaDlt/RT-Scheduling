@@ -67,7 +67,6 @@ class MainSystem:
     def update_plot(self):
         fig, axes = plt.subplots(2, 6, figsize=(15, 8))
         x= [i for i in range( len(self.utilization[0][0]))]
-        print(self.utilization)
         axes = axes.flatten()
         k=0
         for i in range(4):
